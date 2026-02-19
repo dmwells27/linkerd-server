@@ -1,6 +1,7 @@
-FROM node:25
-EXPOSE 3000
+FROM node:25-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
 COPY . .
-RUN npm i
-COPY node_modules .
+EXPOSE 3000
 ENTRYPOINT ["node", "index.js"]
